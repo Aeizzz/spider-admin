@@ -1,10 +1,12 @@
 from flask import jsonify, request, Blueprint
 
 from manager import manager
+from ..tasks.task import startSpider
 
 api = Blueprint('api', __name__, url_prefix='/api')
 
 from app.models import Logs
+
 
 @api.route('/')
 def info():
@@ -78,3 +80,18 @@ def show():
     data_re['spiders'] = datalist
     data_re['code'] = 0
     return jsonify(data_re)
+
+
+@api.route('/timing', methods=['POST', 'GET'])
+def celery():
+    '''
+    post 设置定时任务，name任务名称，list任务列表，time时间
+    get 获取已经设置的定时任务
+    :return:
+    '''
+    if request.method == 'POST':
+        name_list = request.form.getlist('list')
+        startSpider.apply_async(args=[name_list])
+        return jsonify({'code': 0, 'msg': 'success'})
+    elif request.method == 'GET':
+        pass

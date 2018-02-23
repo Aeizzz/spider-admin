@@ -13,3 +13,6 @@ class Config():
     SECRET_KEY = os.urandom(24)
     INDEX = basedir + '/templates/'
     STATIC = basedir + '/statics/'
+    CELERY_BROKER_URL = 'redis://localhost:6379/7'
+    CELERY_RESULT_BACKEND = 'redis://localhost:6379/7'
+    CELERY_TASK_SERIALIZER = 'json'

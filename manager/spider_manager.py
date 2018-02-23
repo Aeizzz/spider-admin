@@ -16,10 +16,6 @@ class SpiderManager(object):
             thread.setDaemon(False)
             thread.start()
 
-
-
-
-
     # 停止一个爬虫
     def stop_spider(self, spider_id):
         self.spider_list[spider_id].stop()
@@ -32,3 +28,5 @@ class SpiderManager(object):
     def get_spider_detail(self, spider_id):
         spider = self.spider_list[spider_id]
         return spider
+
+

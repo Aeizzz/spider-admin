@@ -30,3 +30,4 @@ class BlogProcessor(BaseProcessor):
 
 
 spider = SpiderCore(BlogProcessor()).set_pipeline(pipeline=ConsolePipeline(),pipeline_name='console')
+
