@@ -1,7 +1,7 @@
 from flask import jsonify, request, Blueprint
 
 from manager import manager
-from ..tasks.task import startSpider
+from ..tasks.task import startSpider,start_spider_id
 
 api = Blueprint('api', __name__, url_prefix='/api')
 
@@ -25,7 +25,7 @@ def start_spider():
         data['msg'] = 'error'
         data['spider_id'] = spider_id
         return jsonify(data)
-    manager.start_spider(spider_id)
+    start_spider_id.apply_async(args=[spider_id])
     data = dict()
     data['code'] = 0
     data['msg'] = 'success'

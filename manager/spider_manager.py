@@ -29,4 +29,12 @@ class SpiderManager(object):
         spider = self.spider_list[spider_id]
         return spider
 
+    def start(self,spider_id):
+        '''
+        非多线程启动爬虫
+        :param spider_id:
+        :return:
+        '''
+        if self.spider_list[spider_id]._spider_status == 'stopped':
+            self.spider_list[spider_id].start()
 

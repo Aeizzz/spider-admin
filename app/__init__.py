@@ -10,6 +10,7 @@ db = SQLAlchemy()
 
 celery = Celery(__name__, broker=Config.CELERY_BROKER_URL)
 
+
 def create_app():
     app = Flask(__name__)
     # 加载配置文件

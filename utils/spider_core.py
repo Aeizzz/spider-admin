@@ -16,6 +16,9 @@ from fetchman.settings import default_settings
 from fetchman.utils import FetchManLogger
 from fetchman.utils.httpobj import urlparse_cached
 
+from app.models import Logs
+
+
 
 def _priority_compare(r1, r2):
     return r2.priority - r1.priority
@@ -99,6 +102,7 @@ class SpiderCore(object):
             FetchManLogger.logger.info("START %s SUCCESS" % self._spider_id)
             self._spider_status = 'start'
             # 启动爬虫记录日志
+
             self._queue = PriorityQueue(self._processor)
             if not self._processor.start_requests:
                 self._processor.init_start_requests()
@@ -118,6 +122,7 @@ class SpiderCore(object):
                     break
             # 循环结束，记录停止日志
 
+            self._process_count = 0
             self._spider_status = 'stopped'
             FetchManLogger.logger.info("STOP %s SUCCESS" % self._spider_id)
         except Exception:
