@@ -95,3 +95,17 @@ def celery():
         return jsonify({'code': 0, 'msg': 'success'})
     elif request.method == 'GET':
         pass
+
+@api.route('/add_job',methods=['POST','GET'])
+def add_job():
+    name_list = request.form.getlist('list')
+    year = request.form.get('year')
+    month = request.form.get('month')
+    day = request.form.get('day')
+    hour = request.form.get('hour')
+    minute = request.form.get('minute')
+
+    pass
+
+
+

@@ -2,12 +2,12 @@ from celery import Celery
 from flask import Flask
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
-
+from flask_apscheduler import APScheduler
 login_manager = LoginManager()
 from .config import Config
 
 db = SQLAlchemy()
-
+scheduler = APScheduler()
 celery = Celery(__name__, broker=Config.CELERY_BROKER_URL)
 
 
@@ -19,6 +19,8 @@ def create_app():
     login_manager.init_app(app)
     db.init_app(app)
     celery.conf.update(app.config)
+    scheduler.init_app(app)
+    scheduler.start()
     # 设置
     configure_blueprints(app)
     return app
